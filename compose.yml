@@ -1,0 +1,22 @@
+services:
+  dev:
+    build:
+      context: .
+      target: development
+      args:
+        NODE_VERSION: 24.12.0-alpine
+    ports:
+      - "3000:4200"
+    volumes:
+      - .:/usr/src/app:rw
+      - /usr/src/app/node_modules
+
+  prod:
+    build:
+      context: .
+      target: production
+      args:
+        NODE_VERSION: 24.12.0-alpine
+        NGINX_VERSION: alpine3.22
+    ports:
+      - "8080:8080"
